@@ -1,0 +1,2 @@
+runtime: nodejs
+entrypoint: node server.js

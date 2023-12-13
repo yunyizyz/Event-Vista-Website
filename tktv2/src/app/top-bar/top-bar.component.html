@@ -1,0 +1,4 @@
+<div style="text-align: right;">
+    <a routerLink="/" [ngClass]="{'clicked': isSearch}" (click)="SearchClick()"> Search </a>
+    <a routerLink="/fav-page" [ngClass]="{'clicked': !isSearch}" (click)="FavoriteClick()">Favorites</a>
+</div>

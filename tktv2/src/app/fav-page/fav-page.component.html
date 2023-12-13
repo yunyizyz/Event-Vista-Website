@@ -1,0 +1,38 @@
+<div class="col-md-8 col-12 mx-auto" 
+      style="color: whitesmoke; 
+      font-family: Cambria; 
+      font-size: 25px; 
+      text-align: center;
+      font-weight: bolder;
+      margin: 50px 0px 60px 0px"> 
+      List of your favorite events
+</div>
+
+<div class="container text-center" *ngIf="showfavtable" style="border-radius: 10px;">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Event</th>
+          <th>Category</th>
+          <th>Venue</th>
+          <th>Favorite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of favEvents; let i = index;">
+          <td style="font-weight: bolder;">{{ i + 1 }}</td>
+          <td>{{ event.date }}</td>
+          <td>{{ event.name }}</td>
+          <td>{{ event.category }}&nbsp;|&nbsp;{{event.genre}}&nbsp;|&nbsp;{{event.subGenre}}</td>
+          <td>{{ event.venue }}</td>
+          <td><img src="https://yunyizyz.github.io/delete.png" (click)="DeleteFav(event)" class="trash"></td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+
+<div class="noshow" *ngIf="!showfavtable"> No favorite events to show </div>

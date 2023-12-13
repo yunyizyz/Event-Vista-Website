@@ -1,0 +1,227 @@
+<div class="row" style="margin-bottom: 50px;">
+  <div class="col-md-8 col-12 mx-auto">
+      <div class="back" (click)="backTable.emit()">
+        &lsaquo;Back
+      </div>
+      <div class="event-title">
+        {{ selectedEvent.name}}
+        <button mat-fab aria-label="fav-button" color="success" (click)="ChangeColor()">
+          <div class="fav-button" [class.fav-button-click]="isTrue || checkEventInFavEvents()">
+            <mat-icon>favorite</mat-icon>
+          </div>
+        </button>
+      </div>
+      
+      <!-- tab -->
+      <mat-tab-group animationDuration="1000ms" color="primary">
+        <!-- tab1 content -->
+        <mat-tab label="Event">
+          
+          <div class="container" color="accent">
+            <div class="row" style="background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px);">
+              <div class="col-sm mx-auto text-center">
+                <div class="tab1-title1">
+                  Date<br>
+                </div>
+                <div class="tab1-content">
+                  {{ selectedEvent.dates.start.localDate}}
+                </div><br>
+                <div class="tab1-title">
+                  Artist/Team<br>
+                </div>
+                <div class="tab1-content" *ngFor="let attraction of selectedEvent._embedded.attractions; let isLast = last">
+                  {{ attraction.name }}{{ isLast ? '' : ' |' }}
+                </div><br>
+                <div class="tab1-title">
+                  Venue<br>
+                </div>
+                <div class="tab1-content"> 
+                  {{ selectedEvent._embedded.venues[0].name }}
+                </div><br>
+                <div class="tab1-title">
+                  Genres<br>
+                </div>
+                <div class="tab1-content">
+                  {{ selectedEvent.classifications[0].segment.name }}&nbsp;|&nbsp;{{ selectedEvent.classifications[0].genre.name }}&nbsp;|&nbsp;{{ selectedEvent.classifications[0].subGenre.name }}
+                </div><br>
+                <div class="tab1-title" *ngIf="selectedEvent.priceRanges">
+                  Price Ranges<br>
+                </div>
+                <div class="tab1-content" *ngIf="selectedEvent.priceRanges">
+                  {{ selectedEvent.priceRanges[0].max}} - {{ selectedEvent.priceRanges[0].min}} USD
+                </div><br>
+                <div class="tab1-title">
+                  Ticket Status<br>
+                </div>
+                <!-- status style -->
+                <div id="dt-status" [ngClass]="{
+                  'on': selectedEvent.dates.status.code === 'onsale',
+                  're': selectedEvent.dates.status.code === 'rescheduled',
+                  'off': selectedEvent.dates.status.code === 'offsale',
+                  'canceled': selectedEvent.dates.status.code === 'canceled',
+                  'postponed': selectedEvent.dates.status.code === 'postponed'
+                }">
+                  {{ selectedEvent.dates.status.code }}
+                </div>
+                <div class="tab1-title">
+                  Buy Ticket At:<br>
+                </div>
+                <a style="margin-bottom: 20px;" href={{selectedEvent.url}} target="_blank">Ticket Master</a>
+              </div>
+
+              <div class="col-sm mx-auto d-flex align-items-center">
+                <img id="showmap" class="img-fluid" [src]="selectedEvent.seatmap.staticUrl" *ngIf="selectedEvent.seatmap?.staticUrl">
+                <div *ngIf="!selectedEvent.seatmap?.staticUrl" style="color: red; background-color: whitesmoke;"> Sorry, Seatmap NOT Found</div>
+              </div>
+                <div style="color: white; text-align: center;"> 
+                  Share on:
+                  <a (click)="shareOnTwitter()"><img class="share" width="20px" src="assets/img/icons8-twitter-48.png"></a>
+                  <a (click)="shareOnFacebook()"><img class="share" width="20px" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Facebook_icon_2013.svg"></a>
+                </div>
+            </div>
+          </div>
+            
+        </mat-tab>
+
+        <!-- tab2 -->
+        <mat-tab label="Artist/Teams">
+          <!-- 无artist数据返回/无attractions -->
+          <div class="row" *ngIf="noArtRecord" style="background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px);">
+            <div id="no-art" class="norecord" >
+              No music related artist details to show
+            </div>
+          </div>
+
+          <!-- artist slideshow -->
+          <div id="tab2-slide" class="carousel slide">
+            <div class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let artist of artistData; let i = index" [class.active]="i === nowIndex">
+                  <div class="row" style="padding: 30px 10px 10px 10px; background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px);">
+                    <div class="col-md-3 mx-auto text-center"> <img width="95%" src={{artist.images[0].url}} style="border-radius: 50%;"> <br>
+                      <div style="color:aquamarine; font-weight: bolder; font-size: 20px;"> {{artist.name}} </div>
+                    </div>
+                    <div class="col-md-3 mx-auto text-center">
+                      <div class="tab1-title">Popularity</div><br>
+                      <circle-progress
+                        [percent]="artist.popularity"
+                        [radius]="30"
+                        [outerStrokeWidth]="4"
+                        [innerStrokeWidth]="1"
+                        [outerStrokeColor]="'#ef5350'"
+                        [innerStrokeColor]="'#ef5350'"
+                        [animation]="true"
+                        [titleFontSize]= "'18'"
+                        [animationDuration]="100"
+                      ></circle-progress>
+                    </div>
+                    <div class="col-md-3 mx-auto text-center">
+                      <div class="tab1-title">Followers</div> <br>
+                      {{artist.followers.toLocaleString()}}
+                    </div>
+                    <div class="col-md-3">
+                      <div class="tab1-title">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spotify Link
+                      </div><br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{artist.spotifyUrl}} target="_blank"><img width="40x" alt="Spotify icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/512px-Spotify_icon.svg.png"></a>
+                    </div>
+                  </div>
+                  <div class="row" style="background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px);">
+                    <div class="tab1-title3">
+                      Album featuring {{artist.name}}
+                    </div>
+                  </div>
+                  <div class="row" style="background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px); padding: 20px 10px 10px 30px">
+                    <div class="col-md-4 mx-auto text-center"><img width="90%" src={{artist.albums[0].images[0].url}}></div>
+                    <div class="col-md-4 mx-auto text-center"><img width="90%" src={{artist.albums[1].images[0].url}}></div>
+                    <div class="col-md-4 mx-auto text-center"><img width="90%" src={{artist.albums[2].images[0].url}}></div>
+                  </div>
+                </div>
+              </div>
+              <a href="javascript:void(0)" class="carousel-control-prev" role="button" (click)="prevArtist()">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </a>
+              <a href="javascript:void(0)" class="carousel-control-next" role="button" (click)="nextArtist()">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </a>
+            </div>
+          </div>
+        </mat-tab>
+
+        <!-- tab3 -->
+        <mat-tab label="Venue">
+          <div class="container">
+            <div class="row" style="background-color: rgba(78, 78, 78, 0.745); backdrop-filter: blur(5px); padding: 30px 10px 10px 10px">
+              <div class="col-sm mx-auto text-center">
+                <div class="tab1-title1">
+                  Name<br>
+                </div>
+                <div class="tab1-content">
+                  {{selectedEvent._embedded.venues[0].name}}
+                </div><br>
+                <div class="tab1-title">
+                  Address<br>
+                </div>
+                <div class="tab1-content">
+                  {{selectedEvent._embedded.venues[0].address.line1}},&nbsp; {{selectedEvent._embedded.venues[0].city.name}},&nbsp;{{selectedEvent._embedded.venues[0].state.stateCode}} <br>
+                </div><br>
+                <div class="tab1-title">
+                  Phone Number<br>
+                </div>
+                <div *ngIf="selectedEvent._embedded.venues[0].boxOfficeInfo?.phoneNumberDetaill">
+                {{selectedEvent._embedded.venues[0].boxOfficeInfo.phoneNumberDetail}}
+                </div><br>
+                <div *ngIf="!selectedEvent._embedded.venues[0].boxOfficeInfo?.phoneNumberDetail" style="color: white">
+                Phone Number Not Found
+                </div><br>
+              </div>
+              <!-- tab3 第二列 -->
+              <div class="col-sm mx-auto text-center">
+                <div class="tab1-title1">
+                  Open Hours<br>
+                </div>
+                <div class="showless" id="openHoursDetail" *ngIf="selectedEvent._embedded.venues[0].boxOfficeInfo?.openHoursDetail">
+                  {{selectedEvent._embedded.venues[0].boxOfficeInfo.openHoursDetail}}
+                </div>
+                <div class="showless" *ngIf="!selectedEvent._embedded.venues[0].boxOfficeInfo?.openHoursDetail">
+                  Not Found!
+                </div>
+                <div class="show-button" id="showMoreButton1" onclick="showMore1()" *ngIf="selectedEvent._embedded.venues[0].boxOfficeInfo?.openHoursDetail">
+                  Show More&or;
+                </div>
+                <div class="tab1-title1">
+                  General Rule<br>
+                </div>
+                <div class="showless" id="generalRule" *ngIf="selectedEvent._embedded.venues[0].generalInfo?.generalRule">
+                  {{selectedEvent._embedded.venues[0].generalInfo.generalRule}}
+                </div>
+                <div class="showless" *ngIf="!selectedEvent._embedded.venues[0].generalInfo?.generalRule">
+                  Not Found!
+                </div>
+                <div class="show-button" id="showMoreButton2" onclick="showMore2()" *ngIf="selectedEvent._embedded.venues[0].generalInfo?.generalRule">
+                  Show More&or;
+                </div>
+                <div class="tab1-title1">
+                  Child Rule<br>
+                </div>
+                <div class="showless" id="childRule" *ngIf="selectedEvent._embedded.venues[0].generalInfo?.childRule">
+                  {{selectedEvent._embedded.venues[0].generalInfo.childRule}}
+                </div>
+                <div class="showless" *ngIf="!selectedEvent._embedded.venues[0].generalInfo?.childRule">
+                  Not Found!
+                </div>
+                <div class="show-button" id="showMoreButton3" onclick="showMore3()" *ngIf="selectedEvent._embedded.venues[0].generalInfo?.childRule">
+                  Show More&or;
+                </div>
+              </div>
+              <div style="color: white; text-align: center;"> 
+                <button id="map-button" class="btn btn-danger mx-2" (click)="openMap()">Show venue on Google Map</button>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+  </div>
+</div>

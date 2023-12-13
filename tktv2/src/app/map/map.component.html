@@ -1,0 +1,9 @@
+<div class="vtitle">Event Venue</div>
+
+<div class="my-google-map">
+    <google-map height="350px" width="95%" [options]="mapOptions">
+    <map-marker [position]="marker.position"></map-marker>
+    </google-map>
+</div>
+
+<button (click)="closeMap()"  type="button" class="btn btn-secondary btn-sm" style="margin-top: 15px;">Close</button>

@@ -1,0 +1,10 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/dist/css/bootstrap-grid.min.css';
+
+body {
+    background-image: url('https://yunyizyz.github.io/bg3.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+} 
+
+
