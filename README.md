@@ -1,4 +1,4 @@
-### Event Vista: A Full-stack Website + Android App for Better Event Searching Solution
+# Event Vista: A Full-stack Website + Android App for Better Event Searching Solution
 
 ## Event Vista Website
 https://eventfinderyyz.wl.r.appspot.com/
