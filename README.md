@@ -15,3 +15,10 @@ https://eventfinderyyz.wl.r.appspot.com/
 * JavaScript
 * HTML
 * CSS
+
+## Third-party APIs:
+* Ticket Master
+* Geocoding
+* Spotify
+* Facebook
+* Twitter
