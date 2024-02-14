@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head >
+    <link rel="stylesheet" type="text/css" href="static/tktmaster.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+</head>
+<body>
+    <div class="centeritem">
+        <div class="tb">
+            <div class="tbtitle">
+                Event Search
+            </div>
+            <div style="border-top: 1.2px whitesmoke solid; margin-left: 15px; margin-right: 15px;"></div>
+            <div class="input-total">
+                <form id="search-events" method="get" action = "https://yunyiztktapi.wl.r.appspot.com/">
+                    <label for="keyword" class="inputlb">Keyword:<span style="color: red">*</span></label><br>
+                    <input type="text" id="keyword" name="keyword" required class="input-insize1"><br>
+
+                    <div class="tb2">
+                        <div>
+                            <label for="distance" class="inputlb">Distance(miles):</label><br>
+                            <input type="number" id="distance" name="distance" class="input-insize2" placeholder="10"><br>
+                        </div>
+                        <div>
+                            <label for="category" class="inputlb">Category:<span style="color: red">*</span></label><br>
+                            <select id="category" name="category" required class="input-insize2">
+                                <option class="opt" value="default">Default</option>
+                                <option class="opt" value="music" id="KZFzniwnSyZfZ7v7nJ">Music</option>
+                                <option class="opt" value="sports">Sports</option>
+                                <option class="opt" value="arts">Arts & Theatre</option>
+                                <!-- <option class="opt" value="theatre">Theatre</option> -->
+                                <option class="opt" value="films">Films</option>
+                                <option class="opt" value="miscellaneous">Miscellaneous</option> 
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="location" class="inputlb">Location:<span style="color: red">*</span></label>
+                        &nbsp&nbsp
+                    <input id="check-detect" type="checkbox" onclick="Checkfunc()"/>                        
+                    <label for="check-detect" class="inputlb">Auto-Detect Location</label><br>
+                    <input type="text" id="location" name="location" required class="input-insize1" style="display:block"><br>
+
+                    <input class="searchbutton" id="searchbutton" type="submit" value="SEARCH" onclick="getData()"></input>
+                    <input class="clearbutton" type="reset" value="CLEAR"> </input>
+                    <div id='autolat'></div>
+                    <div id='autolng'></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div></div>
+
+    <div class="centeritem">
+        <div class="norecord" id="norecord">
+            No Records Found !!
+        </div>
+    </div>    
+
+
+    <div class="centeritem">
+        <table id="showtb" class="showtb">
+            <thead class="thead1">
+            <tr>
+                <th>Date</th>
+                <th>Icon</th>
+                <th onclick="sortColumn1()">Event</th>
+                <th onclick="sortColumn2()">Genre</th>
+                <th onclick="sortColumn3()">Venue</th>
+            </tr>
+            </thead>
+            <tbody id="backdata">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="centeritem">
+        <table class="tb3" id="showEventDetail">
+        <thead class="thead2" >
+            <tr>
+                <th id="dt-head" colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody style="margin: 20px 40px 20px 30px">
+            <tr class="odd">
+            <td style="width: 350px">Date</td>
+            <td rowspan="0" style="width:500px"><img id="showmap" style="float: right" width="400"></td>
+            </tr>
+            <tr class="even">
+            <td id="dt-date"></td>
+            </tr>
+            <tr class="odd">
+            <td>Artist/Team</td>
+            </tr>
+            <tr class="even">
+            <td id="dt-art" class="even"></td>
+            </tr>
+            <tr class="odd">
+            <td>Venue</td>
+            </tr>
+            <tr class="even">
+            <td id="dt-venue"></td>
+            </tr>
+            <tr class="odd">
+            <td>Genre</td>
+            </tr>
+            <tr class="even">
+            <td id="dt-genres"></td>
+            </tr>
+            <tr class="odd" id="pricelb">
+            <td>Price Ranges</td>
+            </tr>
+            <tr class="even">
+            <td id="dt-price"></td>
+            </tr>
+            <tr class="odd">
+            <td>Ticket Status</td>
+            </tr>
+            <tr class="even">
+            <td id="dt-status"></td>
+            </tr>
+            <tr class="odd">
+            <td>Buy Ticket At:</td>
+            </tr>
+            <tr>
+            <td><a style="margin: 5px 5px 5px 20px; text-decoration: none; color:skyblue; font-size: 20px;
+                font-family: lato;" id="buylink" target="_blank">TicketMaster</a></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="centeritem">
+        <div class="showVenueDetail-text" id="showVenueDetail-text">Show Venue Detail</div>
+    </div>
+
+    <div class="centeritem">
+        <div class="showVenueDetail" id="showVenueDetail" onclick="VenueDetailFunc()"></div>
+    </div>
+
+    <div class="centeritem">
+        <div id="VenueDetailTable" class="VenueDetailTable">
+            <!-- Title -->
+            <div id="vd-head" class="VenueDetailTableHead"></div>
+            <!-- Border -->
+            <div style="border-top: 2px black solid; margin-left: 200px; margin-right: 200px; margin-top: 10px;margin-bottom: 50px;"></div>
+            <!-- icon -->
+            <div class="centeritem"><img id="venueicon" height="60px" style="display: none;"></div>
+            <!-- Content -->
+            <div class="centeritem">
+            <table style="width: 900px; height: 200px; margin-left: 100px;">
+                <tr>
+                  <td style="border-right: 2px solid black;">
+                    <div style="font-family: Lato; font-size: 20px; font-weight: bold; margin-bottom: 10px;">Address:&nbsp;&nbsp;<div id="vd-address1" style="font-family: Lato; font-size: 20px; font-weight: lighter;"></div><div id="vd-address2" style="font-family: Lato; font-size: 20px;font-weight: lighter;"></div></div>
+                  </td>
+                  <td>
+                    <div><a id="vd-link" class="linkstyle" target="_blank">&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspMore Events at this venue</a></div><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-right: 2px solid black;">
+                    <div><a id="gmaplink" class="linkstyle" target="_blank">&nbsp;&nbsp&nbsp;&nbspOpen in Google Maps</a></div>
+                  </td>
+                  <td></td>
+                </tr>
+            </table>
+            </div>
+    </div>
+
+    <script type="text/javascript" src="static/tktmaster.js"></script>
+
+</body>
+</html>
+

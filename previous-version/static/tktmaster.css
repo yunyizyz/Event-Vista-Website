@@ -1,0 +1,265 @@
+body {
+    background-image: url('https://yunyizyz.github.io/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+.tb {
+    display: inline-grid;
+    border-radius: 25px;
+    grid-template-columns: 700px;
+    grid-template-rows: 90px 40px 100px 100px 100px 105px;
+    grid-gap: 1px;
+    background-color: rgba(85, 85, 85, 0.597);
+    backdrop-filter: blur(10px);
+    margin-top: 40px;
+  }
+.tb2{
+    display: inline-grid;
+    grid-template-columns: 220px 320px;
+    grid-template-rows: 90px;
+    grid-gap: 120px;
+    margin-top: 10px;
+}
+
+.centeritem {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+}
+.tbtitle {
+    font-family: Cambria; 
+    color: whitesmoke; 
+    font-size:50px;
+    margin: auto;
+    text-align: center; 
+}
+.inputlb{
+    color: #a3c1d6;
+    font-size:20px;
+    font-family: lato;
+    padding-bottom: 10px;
+}
+.input-total{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.input-insize1{
+    font-family: lato;
+    width: 640px;
+    border: 0.5px solid whitesmoke;
+    color: whitesmoke;
+    font-size:20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    height: 40px;
+    padding-left: 15px;
+    /* margin: auto; */
+    margin-top: 10px;
+}
+.input-insize2{
+    font-family: lato;
+    color: whitesmoke;
+    font-size:20px;
+    width: 100%;
+    border: 0.5px solid whitesmoke;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    height: 40px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+    .opt{
+        background-color:rgb(47, 47, 47); 
+        border: 1px solid transparent;
+    }
+.searchbutton {
+    display: inline-block;
+    margin: 20px 5px 20px 15px;
+    padding: 16px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    font-family: lato;
+    background-color: #f4722e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #e65929;
+    }
+.searchbutton:hover {background-color: #f8a87c}
+.clearbutton {
+    display: inline-block;
+    margin: 20px 0px 20px 5px;
+    padding: 16px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    font-family: lato;
+    background-color: #556ea7;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #3d4b78;
+    }
+.clearbutton:hover {background-color: #8f9cbb}
+.name-cell{
+    border: 1.5px solid black !important;
+}
+.name-cell:hover {
+    color: rgb(149, 149, 255);
+    cursor: pointer;
+  }
+.odd{
+    margin: 8px 5px 5px 20px;
+    padding-left: 20px;
+    color: #a3f7df;
+    font-size: 23px;
+    font-weight: bold;
+    font-family: lato;
+}
+.even{
+    margin: 5px 5px 5px 20px;
+    color:white;
+    font-size: 20px;
+    font-family: lato;
+}
+
+#dt-status {
+    margin: 20px 5px 20px 20px;
+    color: white;
+    font-size: 18px;
+    font-family: Lato;
+    border-radius: 10px;
+    padding: 2px 10px 2px 15px;
+  }
+  
+  .on {
+    background: linear-gradient(90deg, green 30%, transparent 70%)
+  }
+  
+  .re {
+    background: linear-gradient(90deg, orange 30%, transparent 70%)
+  }
+  
+  .off {
+    background: linear-gradient(90deg, red 30%, transparent 70%)
+  }
+  
+  .canceled {
+    background: linear-gradient(90deg, black 30%, transparent 70%)
+  }
+  
+  .postponed {
+    background: linear-gradient(90deg, orange 30%, transparent 70%)
+  }
+.norecord{
+    display: none;
+    font-family: Lato; 
+    font-size: 40px; 
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    background-color: white;
+    height: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    padding: 10px 10px 10px 10px;
+}
+.showtb{
+    display: none; 
+    background-color:white;
+    border: 1px solid black !important;
+    margin: 50px 30px 50px 30px;
+    align-items: center; 
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    font-size: 15px;
+    font-family: lato;
+    border-collapse: collapse;
+}
+.showtb:hover{
+    cursor: pointer;
+}
+.thead1{
+    height: 30px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid black;
+}
+.tb3{
+    display: none;
+    border-radius: 20px;
+    background-color: rgba(85, 85, 85, 0.597);
+    backdrop-filter: blur(10px);
+    margin-top: 30px;
+    width: 1000px;
+}
+.thead2{
+    height: 30px;
+    font-weight: bold;
+    text-align: center;
+    font-family: Lato; 
+    color: whitesmoke; 
+    font-size:30px;
+    margin: auto;
+    padding-top: 20px;
+}
+.addborder{
+    border: 1.5px solid black !important;
+    padding: 10px 5px 5px 10px;
+}
+.showVenueDetail{
+    width: 60px;
+    height: 60px;
+    color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+    border-left: transparent;
+    border-top: transparent;
+    rotate: 45deg;
+    display: none;
+    margin-bottom: 30px;
+}
+.showVenueDetail:hover{
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    margin-bottom: 40px;
+}
+.showVenueDetail-text{
+    font-family: Lato; 
+    font-size: 25px; 
+    color: rgba(255, 255, 255, 0.721); 
+    margin: 20px 5px 5px 0px;
+    display: none;
+}
+.VenueDetailTable{
+    display: none;
+    grid-template-rows: 100px 100px 80px 200px;
+    margin: 20px 0px 0px 20px;
+    padding: 20px 50px 20px 50px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: white;
+}
+.VenueDetailTableHead{
+    font-family: Lato; 
+    font-size: 40px; 
+    text-align: center;
+    font-weight: bold;
+}
+
+.linkstyle{
+    font-family: Lato; 
+    font-size: 20px; 
+    font-weight: bold;
+    color: rgb(22, 124, 196);
+    text-decoration: none;
+    padding: 0px 0px 10px 10px;
+}
