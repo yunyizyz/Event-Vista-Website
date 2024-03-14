@@ -30,3 +30,6 @@ https://eventfinderyyz.wl.r.appspot.com/
 * Facebook
 * Twitter
 
+## Searching Examples:
+![Search 'los']([http://url/to/img.png](https://github.com/yunyizyz/Event-Vista-Website/blob/ff3ad849a58a12183bc6ada717f3755dcfff5b5e/screenshots/search-los.png)https://github.com/yunyizyz/Event-Vista-Website/blob/ff3ad849a58a12183bc6ada717f3755dcfff5b5e/screenshots/search-los.png)
+
