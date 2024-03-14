@@ -35,7 +35,7 @@ https://eventfinderyyz.wl.r.appspot.com/
 ![Alt text](screenshots/search-los.png?raw=true)
 ![Alt text](screenshots/search-los-result.png?raw=true)
 ![Alt text](screenshots/add-to-fav-1.png?raw=true)
-<br>
+
 * Search music events:
 ![Alt text](screenshots/search-music-1.png?raw=true)
 ![Alt text](screenshots/music-2.png?raw=true)
