@@ -31,5 +31,5 @@ https://eventfinderyyz.wl.r.appspot.com/
 * Twitter
 
 ## Searching Examples:
-[alt text](https://github.com/yunyizyz/Event-Vista-Website/blob/main/screenshots/search-los.png)
+![Alt text](screenshots/search-los.png?raw=true "Title")
 
